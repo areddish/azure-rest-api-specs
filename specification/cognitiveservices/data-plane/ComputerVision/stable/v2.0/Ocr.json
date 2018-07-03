@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2.0",
-    "title": "Computer Vision - OCR API",
-    "description": "The Computer Vision - OCR API provides state-of-the-art algorithms to process images and return information."
+    "title": "Computer Vision API",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information."
   },
   "paths": {
     "/recognizeText": {
