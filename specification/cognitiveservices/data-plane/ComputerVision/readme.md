@@ -20,7 +20,7 @@ These settings apply only when `--tag=release_2_0` is specified on the command l
 ``` yaml $(tag) == 'release_2_0'
 input-file:
  - stable/v2.0/ComputerVision.json
- = stable/v2.0/Ocr.json
+ - stable/v2.0/Ocr.json
 ```
 
 ## Swagger to SDK
