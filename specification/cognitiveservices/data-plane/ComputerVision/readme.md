@@ -21,6 +21,8 @@ These settings apply only when `--tag=release_2_0` is specified on the command l
 input-file:
   - stable/v2.0/ComputerVision.json
   - stable/v2.0/Ocr.json
+
+title: Computer Vision API
 ```
 
 ## Swagger to SDK
