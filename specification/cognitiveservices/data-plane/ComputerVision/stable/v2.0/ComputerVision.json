@@ -362,7 +362,7 @@
           }
         },
         "description": {
-          "$ref": "#/definitions/Description",
+          "$ref": "#/definitions/ImageDescriptionDetails",
           "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata."
         },
         "faces": {
@@ -383,13 +383,6 @@
         "imageType": {
           "$ref": "#/definitions/ImageType",
           "description": "An object providing possible image types and matching confidence levels."
-        },
-        "objects": {
-          "description": "Array of objects describing what was detected in the image.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DetectedObject"
-          }
         },
         "requestId": {
           "description": "Id of the REST API request.",
@@ -435,6 +428,23 @@
         "hint": {
           "description": "Optional categorization for the tag.",
           "type": "string"
+        }
+      }
+    },
+    "ImageDescriptionDetails": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "captions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageCaption"
+          }
         }
       }
     },
@@ -570,6 +580,21 @@
         }
       }
     },
+    "ImageCaption": {
+      "description": "An image caption, i.e. a brief description of what the image depicts.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The text of the caption.",
+          "type": "string"
+        },
+        "confidence": {
+          "format": "double",
+          "description": "The level of confidence the service has in the caption.",
+          "type": "number"
+        }
+      }
+    },
     "FaceRectangle": {
       "description": "An object describing face rectangle.",
       "type": "object",
@@ -635,7 +660,7 @@
       "type": "object",
       "properties": {
         "description": {
-          "$ref": "#/definitions/ImageDescriptionDetails",
+          "$ref": "#/definitions/Description",
           "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
           "x-ms-client-flatten": true
         },
@@ -648,7 +673,7 @@
         }
       }
     },
-    "ImageDescriptionDetails": {
+    "Description": {
       "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
       "type": "object",
       "properties": {
@@ -663,12 +688,12 @@
           "description": "A list of captions, sorted by confidence level.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImageCaption"
+            "$ref": "#/definitions/Caption"
           }
         }
       }
     },
-    "ImageCaption": {
+    "Caption": {
       "description": "An image caption, i.e. a brief description of what the image depicts.",
       "type": "object",
       "properties": {
