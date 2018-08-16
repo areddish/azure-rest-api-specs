@@ -936,7 +936,7 @@
       "description": "Supported Cognitive Services endpoints.",
       "required": true,
       "type": "string",
-      "x-ms-parameterized-host": "client",
+      "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
     },
     "ImageStream": {
