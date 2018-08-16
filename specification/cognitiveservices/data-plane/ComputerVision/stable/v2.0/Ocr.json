@@ -267,18 +267,6 @@
           "description": "A unique request identifier."
         }
       }
-    },
-    "ImageUrl": {
-      "type": "object",
-      "required": [
-        "url"
-      ],
-      "properties": {
-        "url": {
-          "description": "Publicly reachable URL of an image",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
@@ -301,14 +289,20 @@
     "ImageUrl": {
       "name": "ImageUrl",
       "in": "body",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-flatten": true,
       "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "required": true,
       "schema": {
-        "$ref": "#/definitions/ImageUrl"
-      }
-    },
+        "required": [
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "url": {
+            "description": "Publicly reachable URL of an image.",
+            "type": "string"
+          }
+        }
+      },
     "ImageStream": {
       "name": "Image",
       "in": "body",
