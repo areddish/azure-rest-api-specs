@@ -361,6 +361,18 @@
           },
           "x-nullable": true
         },
+        "adult": {
+          "$ref": "#/definitions/AdultInfo",
+          "description": "An object describing whether the image contains adult-oriented content and/or is racy."
+        },
+        "color": {
+          "$ref": "#/definitions/ColorInfo",
+          "description": "An object providing additional metadata describing color attributes."
+        },
+        "imageType": {
+          "$ref": "#/definitions/ImageType",
+          "description": "An object providing possible image types and matching confidence levels."
+        },
         "tags": {
           "description": "A list of tags with confidence level.",
           "type": "array",
@@ -380,18 +392,6 @@
             "$ref": "#/definitions/FaceDescription"
           },
           "x-nullable": true
-        },
-        "adult": {
-          "$ref": "#/definitions/AdultInfo",
-          "description": "An object describing whether the image contains adult-oriented content and/or is racy."
-        },
-        "color": {
-          "$ref": "#/definitions/ColorInfo",
-          "description": "An object providing additional metadata describing color attributes."
-        },
-        "imageType": {
-          "$ref": "#/definitions/ImageType",
-          "description": "An object providing possible image types and matching confidence levels."
         },
         "requestId": {
           "description": "Id of the REST API request.",
@@ -422,6 +422,90 @@
         "detail": {
           "$ref": "#/definitions/CategoryDetail",
           "description": "Details of the identified category."
+        }
+      },
+      "x-nullable": true
+    },
+    "AdultInfo": {
+      "description": "An object describing whether the image contains adult-oriented content and/or is racy.",
+      "type": "object",
+      "properties": {
+        "isAdultContent": {
+          "description": "A value indicating if the image contains adult-oriented content.",
+          "type": "boolean",
+          "x-nullable": false
+        },
+        "isRacyContent": {
+          "description": "A value indicating if the image is racy.",
+          "type": "boolean",
+          "x-nullable": false
+        },
+        "adultScore": {
+          "format": "double",
+          "description": "Score from 0 to 1 that indicates how much the content is considered adult-oriented within the image.",
+          "type": "number",
+          "x-nullable": false
+        },
+        "racyScore": {
+          "format": "double",
+          "description": "Score from 0 to 1 that indicates how suggestive is the image.",
+          "type": "number",
+          "x-nullable": false
+        }
+      },
+      "x-nullable": true
+    },
+    "ColorInfo": {
+      "description": "An object providing additional metadata describing color attributes.",
+      "type": "object",
+      "properties": {
+        "dominantColorForeground": {
+          "description": "Possible dominant foreground color.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "dominantColorBackground": {
+          "description": "Possible dominant background color.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "dominantColors": {
+          "description": "An array of possible dominant colors.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "accentColor": {
+          "description": "Possible accent color.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "isBWImg": {
+          "description": "A value indicating if the image is black and white.",
+          "type": "boolean",
+          "x-nullable": false
+        }
+      },
+      "x-nullable": true
+    },
+    "ImageType": {
+      "description": "An object providing possible image types and matching confidence levels.",
+      "type": "object",
+      "properties": {
+        "clipArtType": {
+          "format": "int32",
+          "description": "Confidence level that the image is a clip art.",
+          "type": "integer",
+          "x-nullable": false
+        },
+        "lineDrawingType": {
+          "format": "int32",
+          "description": "Confidence level that the image is a line drawing.",
+          "type": "integer",
+          "x-nullable": false
         }
       },
       "x-nullable": true
@@ -496,103 +580,19 @@
       },
       "x-nullable": true
     },
-    "AdultInfo": {
-      "description": "An object describing whether the image contains adult-oriented content and/or is racy.",
-      "type": "object",
-      "properties": {
-        "isAdultContent": {
-          "description": "A value indicating if the image contains adult-oriented content.",
-          "type": "boolean",
-          "x-nullable": false
-        },
-        "adultScore": {
-          "format": "double",
-          "description": "Score from 0 to 1 that indicates how much the content is considered adult-oriented within the image.",
-          "type": "number",
-          "x-nullable": false
-        },
-        "isRacyContent": {
-          "description": "A value indicating if the image is racy.",
-          "type": "boolean",
-          "x-nullable": false
-        },
-        "racyScore": {
-          "format": "double",
-          "description": "Score from 0 to 1 that indicates how suggestive is the image.",
-          "type": "number",
-          "x-nullable": false
-        }
-      },
-      "x-nullable": true
-    },
-    "ColorInfo": {
-      "description": "An object providing additional metadata describing color attributes.",
-      "type": "object",
-      "properties": {
-        "dominantColorForeground": {
-          "description": "Possible dominant foreground color.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "dominantColorBackground": {
-          "description": "Possible dominant background color.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "dominantColors": {
-          "description": "An array of possible dominant colors.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "accentColor": {
-          "description": "Possible accent color.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "isBWImg": {
-          "description": "A value indicating if the image is black and white.",
-          "type": "boolean",
-          "x-nullable": false
-        }
-      },
-      "x-nullable": true
-    },
-    "ImageType": {
-      "description": "An object providing possible image types and matching confidence levels.",
-      "type": "object",
-      "properties": {
-        "clipArtType": {
-          "format": "int32",
-          "description": "Confidence level that the image is a clip art.",
-          "type": "integer",
-          "x-nullable": false
-        },
-        "lineDrawingType": {
-          "format": "int32",
-          "description": "Confidence level that the image is a line drawing.",
-          "type": "integer",
-          "x-nullable": false
-        }
-      },
-      "x-nullable": true
-    },
     "ImageMetadata": {
       "description": "Image metadata.",
       "type": "object",
       "properties": {
-        "height": {
-          "format": "int32",
-          "description": "Image height, in pixels.",
-          "type": "integer",
-          "x-nullable": false
-        },
         "width": {
           "format": "int32",
           "description": "Image width, in pixels.",
+          "type": "integer",
+          "x-nullable": false
+        },
+        "height": {
+          "format": "int32",
+          "description": "Image height, in pixels.",
           "type": "integer",
           "x-nullable": false
         },
@@ -649,15 +649,15 @@
       "description": "An object describing face rectangle.",
       "type": "object",
       "properties": {
-        "top": {
-          "format": "int32",
-          "description": "Y-coordinate of the top left point of the face, in pixels.",
-          "type": "integer",
-          "x-nullable": false
-        },
         "left": {
           "format": "int32",
           "description": "X-coordinate of the top left point of the face, in pixels.",
+          "type": "integer",
+          "x-nullable": false
+        },
+        "top": {
+          "format": "int32",
+          "description": "Y-coordinate of the top left point of the face, in pixels.",
           "type": "integer",
           "x-nullable": false
         },
