@@ -43,7 +43,8 @@
                 "modelAsString": false
               }
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "csv",
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -91,7 +92,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1
+            "default": 1,
+            "x-nullable": false
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -166,7 +168,8 @@
             "in": "path",
             "description": "The domain-specific content to recognize.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -296,7 +299,8 @@
             "type": "integer",
             "format": "int32",
             "maximum": 1023,
-            "minimum": 1
+            "minimum": 1,
+            "x-nullable": true
           },
           {
             "name": "height",
@@ -306,7 +310,8 @@
             "type": "integer",
             "format": "int32",
             "maximum": 1023,
-            "minimum": 1
+            "minimum": 1,
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ImageUrl"
@@ -317,7 +322,8 @@
             "description": "Boolean flag for enabling smart cropping.",
             "required": false,
             "type": "boolean",
-            "default": true
+            "default": true,
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -352,14 +358,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Category"
-          }
+          },
+          "x-nullable": true
         },
         "tags": {
           "description": "A list of tags with confidence level.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageTag"
-          }
+          },
+          "x-nullable": true
         },
         "description": {
           "$ref": "#/definitions/ImageDescriptionDetails",
@@ -370,7 +378,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FaceDescription"
-          }
+          },
+          "x-nullable": true
         },
         "adult": {
           "$ref": "#/definitions/AdultInfo",
@@ -386,12 +395,14 @@
         },
         "requestId": {
           "description": "Id of the REST API request.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
         }
-      }
+      },
+      "x-nullable": true
     },
     "Category": {
       "description": "An object describing identified category.",
@@ -399,18 +410,21 @@
       "properties": {
         "name": {
           "description": "Name of the category.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "score": {
           "format": "double",
           "description": "Scoring of the category.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         },
         "detail": {
           "$ref": "#/definitions/CategoryDetail",
           "description": "Details of the identified category."
         }
-      }
+      },
+      "x-nullable": true
     },
     "ImageTag": {
       "description": "An image caption, i.e. a brief description of what the image depicts.",
@@ -418,18 +432,22 @@
       "properties": {
         "name": {
           "description": "The tag value.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "confidence": {
           "format": "double",
           "description": "The level of confidence the service has in the caption.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         },
         "hint": {
           "description": "Optional categorization for the tag.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "ImageDescriptionDetails": {
       "type": "object",
@@ -437,16 +455,20 @@
         "tags": {
           "type": "array",
           "items": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "captions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageCaption"
-          }
+          },
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "FaceDescription": {
       "description": "An object describing a face identified in the image.",
@@ -455,7 +477,8 @@
         "age": {
           "format": "int32",
           "description": "Possible age of the face.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": false
         },
         "gender": {
           "description": "Possible gender of the face.",
@@ -463,13 +486,15 @@
             "Male",
             "Female"
           ],
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "faceRectangle": {
           "$ref": "#/definitions/FaceRectangle",
           "description": "Rectangle in the image containing the identified face."
         }
-      }
+      },
+      "x-nullable": true
     },
     "AdultInfo": {
       "description": "An object describing whether the image contains adult-oriented content and/or is racy.",
@@ -477,23 +502,28 @@
       "properties": {
         "isAdultContent": {
           "description": "A value indicating if the image contains adult-oriented content.",
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": false
         },
         "adultScore": {
           "format": "double",
           "description": "Score from 0 to 1 that indicates how much the content is considered adult-oriented within the image.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         },
         "isRacyContent": {
           "description": "A value indicating if the image is racy.",
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": false
         },
         "racyScore": {
           "format": "double",
           "description": "Score from 0 to 1 that indicates how suggestive is the image.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         }
-      }
+      },
+      "x-nullable": true
     },
     "ColorInfo": {
       "description": "An object providing additional metadata describing color attributes.",
@@ -501,28 +531,35 @@
       "properties": {
         "dominantColorForeground": {
           "description": "Possible dominant foreground color.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "dominantColorBackground": {
           "description": "Possible dominant background color.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "dominantColors": {
           "description": "An array of possible dominant colors.",
           "type": "array",
           "items": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "accentColor": {
           "description": "Possible accent color.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "isBWImg": {
           "description": "A value indicating if the image is black and white.",
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": false
         }
-      }
+      },
+      "x-nullable": true
     },
     "ImageType": {
       "description": "An object providing possible image types and matching confidence levels.",
@@ -531,14 +568,17 @@
         "clipArtType": {
           "format": "int32",
           "description": "Confidence level that the image is a clip art.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": false
         },
         "lineDrawingType": {
           "format": "int32",
           "description": "Confidence level that the image is a line drawing.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": false
         }
-      }
+      },
+      "x-nullable": true
     },
     "ImageMetadata": {
       "description": "Image metadata.",
@@ -547,18 +587,22 @@
         "height": {
           "format": "int32",
           "description": "Image height, in pixels.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": false
         },
         "width": {
           "format": "int32",
           "description": "Image width, in pixels.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": false
         },
         "format": {
           "description": "Image format.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "CategoryDetail": {
       "description": "An object describing additional category details.",
@@ -569,16 +613,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CelebritiesModel"
-          }
+          },
+          "x-nullable": true
         },
         "landmarks": {
           "description": "An array of landmarks if any identified.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LandmarksModel"
-          }
+          },
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "ImageCaption": {
       "description": "An image caption, i.e. a brief description of what the image depicts.",
@@ -586,14 +633,17 @@
       "properties": {
         "text": {
           "description": "The text of the caption.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "confidence": {
           "format": "double",
           "description": "The level of confidence the service has in the caption.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         }
-      }
+      },
+      "x-nullable": true
     },
     "FaceRectangle": {
       "description": "An object describing face rectangle.",
@@ -602,24 +652,29 @@
         "top": {
           "format": "int32",
           "description": "Y-coordinate of the top left point of the face, in pixels.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": false
         },
         "left": {
           "format": "int32",
           "description": "X-coordinate of the top left point of the face, in pixels.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": false
         },
         "width": {
           "format": "int32",
           "description": "Width measured from the top-left point of the face, in pixels.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": false
         },
         "height": {
           "format": "int32",
           "description": "Height measured from the top-left point of the face, in pixels.",
-          "type": "integer"
+          "type": "integer",
+          "x-nullable": false
         }
-      }
+      },
+      "x-nullable": true
     },
     "CelebritiesModel": {
       "description": "An object describing possible celebrity identification.",
@@ -627,18 +682,21 @@
       "properties": {
         "name": {
           "description": "Name of the celebrity.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "confidence": {
           "format": "double",
           "description": "Confidence level for the celebrity recognition as a value ranging from 0 to 1.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         },
         "faceRectangle": {
           "$ref": "#/definitions/FaceRectangle",
           "description": "Location of the identified face in the image."
         }
-      }
+      },
+      "x-nullable": true
     },
     "LandmarksModel": {
       "description": "A landmark recognized in the image.",
@@ -646,14 +704,17 @@
       "properties": {
         "name": {
           "description": "Name of the landmark.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "confidence": {
           "format": "double",
           "description": "Confidence level for the landmark recognition as a value ranging from 0 to 1.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         }
-      }
+      },
+      "x-nullable": true
     },
     "ImageDescription": {
       "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
@@ -666,12 +727,14 @@
         },
         "requestId": {
           "description": "Id of the REST API request.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
         }
-      }
+      },
+      "x-nullable": true
     },
     "Description": {
       "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
@@ -681,17 +744,21 @@
           "description": "A collection of image tags.",
           "type": "array",
           "items": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         },
         "captions": {
           "description": "A list of captions, sorted by confidence level.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Caption"
-          }
+          },
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "Caption": {
       "description": "An image caption, i.e. a brief description of what the image depicts.",
@@ -699,14 +766,17 @@
       "properties": {
         "text": {
           "description": "The text of the caption.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "confidence": {
           "format": "double",
           "description": "The level of confidence the service has in the caption.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         }
-      }
+      },
+      "x-nullable": true
     },
     "ListModelsResult": {
       "description": "Result of the List Domain Models operation.",
@@ -717,9 +787,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ModelDescription"
-          }
+          },
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "ModelDescription": {
       "description": "An object describing supported model by name and categories.",
@@ -727,16 +799,20 @@
       "properties": {
         "name": {
           "description": "The name of the model.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "categories": {
           "description": "Categories of the model.",
           "type": "array",
           "items": {
-            "type": "string"
-          }
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "DomainModelResults": {
       "description": "Result of image analysis using a specific domain model including additional metadata.",
@@ -749,37 +825,44 @@
         },
         "requestId": {
           "description": "Id of the REST API request.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
         }
-      }
+      },
+      "x-nullable": true
     },
     "OcrResult": {
       "type": "object",
       "properties": {
         "language": {
           "description": "The BCP-47 language code of the text in the image.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "orientation": {
           "description": "Orientation of the text recognized in the image. The value (up, down, left, or right) refers to the direction that the top of the recognized text is facing, after the image has been rotated around its center according to the detected text angle (see textAngle property).",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "textAngle": {
           "format": "double",
           "description": "The angle, in degrees, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
-          "type": "number"
+          "type": "number",
+          "x-nullable": false
         },
         "regions": {
           "description": "An array of objects, where each object represents a region of recognized text.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OcrRegion"
-          }
+          },
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "OcrRegion": {
       "description": "A region consists of multiple lines (e.g. a column of text in a multi-column document).",
@@ -787,16 +870,19 @@
       "properties": {
         "boundingBox": {
           "description": "Bounding box of a recognized region. The four integers represent the x-coordinate of the left edge, the y-coordinate of the top edge, width, and height of the bounding box, in the coordinate system of the input image, after it has been rotated around its center according to the detected text angle (see textAngle property), with the origin at the top-left corner, and the y-axis pointing down.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "lines": {
           "description": "An array of recognized lines of text.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OcrLine"
-          }
+          },
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "OcrLine": {
       "description": "An object describing a single recognized line of text.",
@@ -804,16 +890,19 @@
       "properties": {
         "boundingBox": {
           "description": "Bounding box of a recognized line. The four integers represent the x-coordinate of the left edge, the y-coordinate of the top edge, width, and height of the bounding box, in the coordinate system of the input image, after it has been rotated around its center according to the detected text angle (see textAngle property), with the origin at the top-left corner, and the y-axis pointing down.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "words": {
           "description": "An array of objects, where each object represents a recognized word.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OcrWord"
-          }
+          },
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "OcrWord": {
       "description": "Information on a recognized word.",
@@ -821,13 +910,16 @@
       "properties": {
         "boundingBox": {
           "description": "Bounding box of a recognized word. The four integers represent the x-coordinate of the left edge, the y-coordinate of the top edge, width, and height of the bounding box, in the coordinate system of the input image, after it has been rotated around its center according to the detected text angle (see textAngle property), with the origin at the top-left corner, and the y-axis pointing down.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "text": {
           "description": "String value of a recognized word.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
-      }
+      },
+      "x-nullable": true
     },
     "TagResult": {
       "description": "The results of a image tag operation, including any tags and image metadata.",
@@ -838,16 +930,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageTag"
-          }
+          },
+          "x-nullable": true
         },
         "requestId": {
           "description": "Id of the REST API request.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
         }
-      }
+      },
+      "x-nullable": true
     },
     "ComputerVisionError": {
       "required": [
@@ -898,16 +993,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LandmarksModel"
-          }
+          },
+          "x-nullable": true
         },
         "requestId": {
           "description": "Id of the REST API request.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
         }
-      }
+      },
+      "x-nullable": true
     },
     "CelebrityResults": {
       "description": "List of celebrities recognized in the image.",
@@ -917,16 +1015,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CelebritiesModel"
-          }
+          },
+          "x-nullable": true
         },
         "requestId": {
           "description": "Id of the REST API request.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
         }
-      }
+      },
+      "x-nullable": true
     }
   },
   "parameters": {
@@ -1122,7 +1223,8 @@
                 "modelAsString": false
               }
             },
-            "collectionFormat": "csv"
+            "collectionFormat": "csv",
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -1171,7 +1273,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1
+            "default": 1,
+            "x-nullable": false
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -1221,7 +1324,8 @@
             "type": "integer",
             "format": "int32",
             "maximum": 1023,
-            "minimum": 1
+            "minimum": 1,
+            "x-nullable": true
           },
           {
             "name": "height",
@@ -1231,7 +1335,8 @@
             "type": "integer",
             "format": "int32",
             "maximum": 1023,
-            "minimum": 1
+            "minimum": 1,
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ImageStream"
@@ -1242,7 +1347,8 @@
             "description": "Boolean flag for enabling smart cropping.",
             "required": false,
             "type": "boolean",
-            "default": true
+            "default": true,
+            "x-nullable": false
           }
         ],
         "responses": {
@@ -1283,7 +1389,8 @@
             "in": "path",
             "description": "The domain-specific content to recognize.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
