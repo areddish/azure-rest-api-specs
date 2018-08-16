@@ -302,7 +302,8 @@
             "type": "string"
           }
         }
-      },
+      }
+    },
     "ImageStream": {
       "name": "Image",
       "in": "body",
