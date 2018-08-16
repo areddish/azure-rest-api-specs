@@ -322,7 +322,7 @@
     },
     "Endpoint": {
       "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints",
+      "description": "Supported Cognitive Services endpoints.",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
