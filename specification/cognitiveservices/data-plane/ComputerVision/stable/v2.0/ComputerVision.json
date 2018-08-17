@@ -1146,8 +1146,7 @@
           "Faces",
           "ImageType",
           "Color",
-          "Adult",
-          "Objects"
+          "Adult"
         ],
         "x-nullable": false,
         "x-ms-enum": {
