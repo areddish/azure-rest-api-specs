@@ -302,7 +302,9 @@
             "type": "string"
           }
         }
-      }
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true
     },
     "ImageStream": {
       "name": "Image",
