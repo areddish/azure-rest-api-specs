@@ -226,6 +226,18 @@
         "x-nullable": false
       }
     },
+    "ImageUrl": {
+      "required": [
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image",
+          "type": "string"
+        }
+      }
+    },
     "ComputerVisionError": {
       "type": "object",
       "required": [
@@ -289,22 +301,13 @@
     "ImageUrl": {
       "name": "ImageUrl",
       "in": "body",
-      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
       "required": true,
-      "schema": {
-        "required": [
-          "url"
-        ],
-        "type": "object",
-        "properties": {
-          "url": {
-            "description": "Publicly reachable URL of an image.",
-            "type": "string"
-          }
-        }
-      },
       "x-ms-parameter-location": "method",
-      "x-ms-client-flatten": true
+      "x-ms-client-flatten": true,
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      }
     },
     "ImageStream": {
       "name": "Image",
