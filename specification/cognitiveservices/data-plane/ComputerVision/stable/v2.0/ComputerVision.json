@@ -575,7 +575,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "Gender",
+            "name": "Gender-",
             "modelAsString": false
           },
           "x-nullable": false
