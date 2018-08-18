@@ -534,9 +534,11 @@
       "x-nullable": true
     },
     "ImageDescriptionDetails": {
+      "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
       "type": "object",
       "properties": {
         "tags": {
+          "description": "A collection of image tags.",
           "type": "array",
           "items": {
             "type": "string",
@@ -545,6 +547,7 @@
           "x-nullable": true
         },
         "captions": {
+          "description": "A list of captions, sorted by confidence level.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageCaption"
@@ -721,7 +724,7 @@
       "type": "object",
       "properties": {
         "description": {
-          "$ref": "#/definitions/Description",
+          "$ref": "#/definitions/ImageDescriptionDetails",
           "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
           "x-ms-client-flatten": true
         },
@@ -732,48 +735,6 @@
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata"
-        }
-      },
-      "x-nullable": true
-    },
-    "Description": {
-      "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "A collection of image tags.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "captions": {
-          "description": "A list of captions, sorted by confidence level.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Caption"
-          },
-          "x-nullable": true
-        }
-      },
-      "x-nullable": true
-    },
-    "Caption": {
-      "description": "An image caption, i.e. a brief description of what the image depicts.",
-      "type": "object",
-      "properties": {
-        "text": {
-          "description": "The text of the caption.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "confidence": {
-          "format": "double",
-          "description": "The level of confidence the service has in the caption.",
-          "type": "number",
-          "x-nullable": false
         }
       },
       "x-nullable": true
