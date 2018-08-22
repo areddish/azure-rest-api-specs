@@ -382,7 +382,7 @@
           "x-nullable": true
         },
         "description": {
-          "$ref": "#/definitions/Description",
+          "$ref": "#/definitions/ImageDescriptionDetails",
           "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata."
         },
         "faces": {
@@ -533,10 +533,12 @@
       },
       "x-nullable": true
     },
-    "Description": {
+    "ImageDescriptionDetails": {
+      "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
       "type": "object",
       "properties": {
         "tags": {
+          "description": "A collection of image tags.",
           "type": "array",
           "items": {
             "type": "string",
@@ -545,9 +547,10 @@
           "x-nullable": true
         },
         "captions": {
+          "description": "A list of captions, sorted by confidence level.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Caption"
+            "$ref": "#/definitions/ImageCaption"
           },
           "x-nullable": true
         }
@@ -631,7 +634,7 @@
       },
       "x-nullable": true
     },
-    "Caption": {
+    "ImageCaption": {
       "description": "An image caption, i.e. a brief description of what the image depicts.",
       "type": "object",
       "properties": {
@@ -740,48 +743,6 @@
       },
       "x-nullable": true
     },
-    "ImageDescriptionDetails": {
-      "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "A collection of image tags.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        },
-        "captions": {
-          "description": "A list of captions, sorted by confidence level.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageCaption"
-          },
-          "x-nullable": true
-        }
-      },
-      "x-nullable": true
-    },
-    "ImageCaption": {
-      "description": "An image caption, i.e. a brief description of what the image depicts.",
-      "type": "object",
-      "properties": {
-        "text": {
-          "description": "The text of the caption.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "confidence": {
-          "format": "double",
-          "description": "The level of confidence the service has in the caption.",
-          "type": "number",
-          "x-nullable": false
-        }
-      },
-      "x-nullable": true
-    },
     "ListModelsResult": {
       "description": "Result of the List Domain Models operation.",
       "type": "object",
@@ -792,6 +753,7 @@
           "items": {
             "$ref": "#/definitions/ModelDescription"
           },
+          "readOnly": true,
           "x-nullable": true
         }
       },
@@ -846,16 +808,16 @@
           "type": "string",
           "x-nullable": true
         },
-        "orientation": {
-          "description": "Orientation of the text recognized in the image. The value (up, down, left, or right) refers to the direction that the top of the recognized text is facing, after the image has been rotated around its center according to the detected text angle (see textAngle property).",
-          "type": "string",
-          "x-nullable": true
-        },
         "textAngle": {
           "format": "double",
           "description": "The angle, in degrees, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
           "type": "number",
           "x-nullable": false
+        },
+        "orientation": {
+          "description": "Orientation of the text recognized in the image. The value (up, down, left, or right) refers to the direction that the top of the recognized text is facing, after the image has been rotated around its center according to the detected text angle (see textAngle property).",
+          "type": "string",
+          "x-nullable": true
         },
         "regions": {
           "description": "An array of objects, where each object represents a region of recognized text.",
