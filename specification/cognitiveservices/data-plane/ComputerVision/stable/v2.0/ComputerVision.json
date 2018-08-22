@@ -125,7 +125,7 @@
     },
     "/models": {
       "get": {
-        "description": "This operation returns the list of domain-specific models that are supported by the Computer Vision API.  Currently, the API only supports one domain-specific model: a celebrity recognizer. A successful response will be returned in JSON.  If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+        "description": "This operation returns the list of domain-specific models that are supported by the Computer Vision API.\r\nCurrently, the API only supports one domain-specific model: a celebrity recognizer.\r\nA successful response will be returned in JSON.  If the request failed, the response will contain an error code\r\nand a message to help understand what went wrong.",
         "operationId": "ListModels",
         "consumes": [],
         "produces": [
@@ -154,7 +154,7 @@
     },
     "/models/{model}/analyze": {
       "post": {
-        "description": "This operation recognizes content within an image by applying a domain-specific model.  The list of domain-specific models that are supported by the Computer Vision API can be retrieved using the /models GET request.  Currently, the API only provides a single domain-specific model: celebrities. Two input methods are supported -- (1) Uploading an image or (2) specifying an image URL. A successful response will be returned in JSON.  If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+        "description": "This operation recognizes content within an image by applying a domain-specific model.  The list of domain-specific models that are supported\r\nby the Computer Vision API can be retrieved using the /models GET request.  Currently, the API only provides a single domain-specific model:\r\ncelebrities.\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON.\r\nIf the request failed, the response will contain an error code and a message to help understand what went wrong.",
         "operationId": "AnalyzeImageByDomain",
         "consumes": [
           "application/json"
@@ -214,10 +214,10 @@
             "$ref": "#/parameters/DetectOrientation"
           },
           {
-            "$ref": "#/parameters/ImageUrl"
+            "$ref": "#/parameters/OcrLanguage"
           },
           {
-            "$ref": "#/parameters/OcrLanguage"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -298,7 +298,7 @@
             "required": true,
             "type": "integer",
             "format": "int32",
-            "maximum": 1023,
+            "maximum": 1024,
             "minimum": 1,
             "x-nullable": true
           },
@@ -309,12 +309,9 @@
             "required": true,
             "type": "integer",
             "format": "int32",
-            "maximum": 1023,
+            "maximum": 1024,
             "minimum": 1,
             "x-nullable": true
-          },
-          {
-            "$ref": "#/parameters/ImageUrl"
           },
           {
             "name": "smartCropping",
@@ -324,6 +321,9 @@
             "type": "boolean",
             "default": true,
             "x-nullable": false
+          },
+          {
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "responses": {
@@ -382,7 +382,7 @@
           "x-nullable": true
         },
         "description": {
-          "$ref": "#/definitions/ImageDescriptionDetails",
+          "$ref": "#/definitions/Description",
           "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata."
         },
         "faces": {
@@ -533,12 +533,10 @@
       },
       "x-nullable": true
     },
-    "ImageDescriptionDetails": {
-      "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
+    "Description": {
       "type": "object",
       "properties": {
         "tags": {
-          "description": "A collection of image tags.",
           "type": "array",
           "items": {
             "type": "string",
@@ -547,10 +545,9 @@
           "x-nullable": true
         },
         "captions": {
-          "description": "A list of captions, sorted by confidence level.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ImageCaption"
+            "$ref": "#/definitions/Caption"
           },
           "x-nullable": true
         }
@@ -574,7 +571,7 @@
             "Female"
           ],
           "type": "string",
-          "x-nullable": true
+          "x-nullable": false
         },
         "faceRectangle": {
           "$ref": "#/definitions/FaceRectangle",
@@ -630,7 +627,7 @@
       },
       "x-nullable": true
     },
-    "ImageCaption": {
+    "Caption": {
       "description": "An image caption, i.e. a brief description of what the image depicts.",
       "type": "object",
       "properties": {
@@ -739,6 +736,48 @@
       },
       "x-nullable": true
     },
+    "ImageDescriptionDetails": {
+      "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "A collection of image tags.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "captions": {
+          "description": "A list of captions, sorted by confidence level.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageCaption"
+          },
+          "x-nullable": true
+        }
+      },
+      "x-nullable": true
+    },
+    "ImageCaption": {
+      "description": "An image caption, i.e. a brief description of what the image depicts.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The text of the caption.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "confidence": {
+          "format": "double",
+          "description": "The level of confidence the service has in the caption.",
+          "type": "number",
+          "x-nullable": false
+        }
+      },
+      "x-nullable": true
+    },
     "ListModelsResult": {
       "description": "Result of the List Domain Models operation.",
       "type": "object",
@@ -803,16 +842,16 @@
           "type": "string",
           "x-nullable": true
         },
+        "orientation": {
+          "description": "Orientation of the text recognized in the image. The value (up, down, left, or right) refers to the direction that the top of the recognized text is facing, after the image has been rotated around its center according to the detected text angle (see textAngle property).",
+          "type": "string",
+          "x-nullable": true
+        },
         "textAngle": {
           "format": "double",
           "description": "The angle, in degrees, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
           "type": "number",
           "x-nullable": false
-        },
-        "orientation": {
-          "description": "Orientation of the text recognized in the image. The value (up, down, left, or right) refers to the direction that the top of the recognized text is facing, after the image has been rotated around its center according to the detected text angle (see textAngle property).",
-          "type": "string",
-          "x-nullable": true
         },
         "regions": {
           "description": "An array of objects, where each object represents a region of recognized text.",
@@ -904,18 +943,6 @@
         }
       },
       "x-nullable": true
-    },
-    "ImageUrl": {
-      "required": [
-        "url"
-      ],
-      "type": "object",
-      "properties": {
-        "url": {
-          "description": "Publicly reachable URL of an image",
-          "type": "string"
-        }
-      }
     },
     "ComputerVisionError": {
       "required": [
@@ -1030,7 +1057,16 @@
       "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ImageUrl"
+        "required": [
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "url": {
+            "description": "Publicly reachable URL of an image.",
+            "type": "string"
+          }
+        }
       },
       "x-ms-parameter-location": "method",
       "x-ms-client-flatten": true
@@ -1110,7 +1146,8 @@
           "Faces",
           "ImageType",
           "Color",
-          "Adult"
+          "Adult",
+          "Objects"
         ],
         "x-nullable": false,
         "x-ms-enum": {
@@ -1286,7 +1323,7 @@
             "required": true,
             "type": "integer",
             "format": "int32",
-            "maximum": 1023,
+            "maximum": 1024,
             "minimum": 1,
             "x-nullable": true
           },
@@ -1297,12 +1334,9 @@
             "required": true,
             "type": "integer",
             "format": "int32",
-            "maximum": 1023,
+            "maximum": 1024,
             "minimum": 1,
             "x-nullable": true
-          },
-          {
-            "$ref": "#/parameters/ImageStream"
           },
           {
             "name": "smartCropping",
@@ -1312,6 +1346,9 @@
             "type": "boolean",
             "default": true,
             "x-nullable": false
+          },
+          {
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
@@ -1337,7 +1374,7 @@
     },
     "/models/{model}/analyze?overload=stream": {
       "post": {
-        "description": "This operation recognizes content within an image by applying a domain-specific model.  The list of domain-specific models that are supported by the Computer Vision API can be retrieved using the /models GET request.  Currently, the API only provides a single domain-specific model: celebrities. Two input methods are supported -- (1) Uploading an image or (2) specifying an image URL. A successful response will be returned in JSON.  If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+        "description": "This operation recognizes content within an image by applying a domain-specific model.  The list of domain-specific models that are supported\r\nby the Computer Vision API can be retrieved using the /models GET request.  Currently, the API only provides a single domain-specific model:\r\ncelebrities.\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON.\r\nIf the request failed, the response will contain an error code and a message to help understand what went wrong.",
         "operationId": "AnalyzeImageByDomainInStream",
         "consumes": [
           "application/octet-stream",
@@ -1399,10 +1436,10 @@
             "$ref": "#/parameters/DetectOrientation"
           },
           {
-            "$ref": "#/parameters/ImageStream"
+            "$ref": "#/parameters/OcrLanguage"
           },
           {
-            "$ref": "#/parameters/OcrLanguage"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "responses": {
