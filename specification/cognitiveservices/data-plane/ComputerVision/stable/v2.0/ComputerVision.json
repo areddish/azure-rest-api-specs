@@ -93,7 +93,7 @@
             "type": "integer",
             "format": "int32",
             "default": 1,
-            "x-nullable": false
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -320,7 +320,7 @@
             "required": false,
             "type": "boolean",
             "default": true,
-            "x-nullable": false
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ImageUrl"
@@ -483,7 +483,7 @@
           "type": "string",
           "x-nullable": true
         },
-        "isBWImg": {
+        "isBwImg": {
           "description": "A value indicating if the image is black and white.",
           "type": "boolean",
           "x-nullable": false
@@ -1243,7 +1243,7 @@
             "type": "integer",
             "format": "int32",
             "default": 1,
-            "x-nullable": false
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
@@ -1314,7 +1314,7 @@
             "required": false,
             "type": "boolean",
             "default": true,
-            "x-nullable": false
+            "x-nullable": true
           },
           {
             "$ref": "#/parameters/ImageStream"
