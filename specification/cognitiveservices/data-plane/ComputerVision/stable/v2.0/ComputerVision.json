@@ -300,7 +300,7 @@
             "format": "int32",
             "maximum": 1024,
             "minimum": 1,
-            "x-nullable": true
+            "x-nullable": false
           },
           {
             "name": "height",
@@ -311,7 +311,7 @@
             "format": "int32",
             "maximum": 1024,
             "minimum": 1,
-            "x-nullable": true
+            "x-nullable": false
           },
           {
             "name": "smartCropping",
@@ -1294,7 +1294,7 @@
             "format": "int32",
             "maximum": 1024,
             "minimum": 1,
-            "x-nullable": true
+            "x-nullable": false
           },
           {
             "name": "height",
@@ -1305,7 +1305,7 @@
             "format": "int32",
             "maximum": 1024,
             "minimum": 1,
-            "x-nullable": true
+            "x-nullable": false
           },
           {
             "name": "smartCropping",
