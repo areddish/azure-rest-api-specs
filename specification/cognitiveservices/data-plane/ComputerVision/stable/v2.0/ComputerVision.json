@@ -295,22 +295,22 @@
             "name": "width",
             "in": "query",
             "description": "Width of the thumbnail, in pixels. It must be between 1 and 1024. Recommended minimum of 50.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "maximum": 1024,
-            "minimum": 1,
+            "minimum": 0,
             "x-nullable": false
           },
           {
             "name": "height",
             "in": "query",
             "description": "Height of the thumbnail, in pixels. It must be between 1 and 1024. Recommended minimum of 50.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "maximum": 1024,
-            "minimum": 1,
+            "minimum": 0,
             "x-nullable": false
           },
           {
@@ -319,7 +319,7 @@
             "description": "Boolean flag for enabling smart cropping.",
             "required": false,
             "type": "boolean",
-            "default": true,
+            "default": false,
             "x-nullable": true
           },
           {
@@ -511,22 +511,22 @@
       "x-nullable": true
     },
     "ImageTag": {
-      "description": "An image caption, i.e. a brief description of what the image depicts.",
+      "description": "An entity observation in the image, along with the confidence score.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "The tag value.",
+          "description": "Name of the entity.",
           "type": "string",
           "x-nullable": true
         },
         "confidence": {
           "format": "double",
-          "description": "The level of confidence the service has in the caption.",
+          "description": "The level of confidence that the entity was observed.",
           "type": "number",
           "x-nullable": false
         },
         "hint": {
-          "description": "Optional categorization for the tag.",
+          "description": "Optional hint/details for this tag.",
           "type": "string",
           "x-nullable": true
         }
@@ -1115,8 +1115,7 @@
           "Faces",
           "ImageType",
           "Color",
-          "Adult",
-          "Objects"
+          "Adult"
         ],
         "x-nullable": false,
         "x-ms-enum": {
@@ -1289,22 +1288,22 @@
             "name": "width",
             "in": "query",
             "description": "Width of the thumbnail, in pixels. It must be between 1 and 1024. Recommended minimum of 50.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "maximum": 1024,
-            "minimum": 1,
+            "minimum": 0,
             "x-nullable": false
           },
           {
             "name": "height",
             "in": "query",
             "description": "Height of the thumbnail, in pixels. It must be between 1 and 1024. Recommended minimum of 50.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "maximum": 1024,
-            "minimum": 1,
+            "minimum": 0,
             "x-nullable": false
           },
           {
@@ -1313,7 +1312,7 @@
             "description": "Boolean flag for enabling smart cropping.",
             "required": false,
             "type": "boolean",
-            "default": true,
+            "default": false,
             "x-nullable": true
           },
           {
