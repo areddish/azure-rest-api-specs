@@ -578,7 +578,7 @@
             "name": "Gender",
             "modelAsString": false
           },
-          "x-nullable": false
+          "x-nullable": true
         },
         "faceRectangle": {
           "$ref": "#/definitions/FaceRectangle",
