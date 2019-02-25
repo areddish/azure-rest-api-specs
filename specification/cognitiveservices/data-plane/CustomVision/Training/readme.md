@@ -38,7 +38,7 @@ input-file: stable/v2.2/Training.json
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_0'
-input-file: stable/v2.2/Training.json
+input-file: stable/v3.0/Training.json
 ```
 
 # Validation
